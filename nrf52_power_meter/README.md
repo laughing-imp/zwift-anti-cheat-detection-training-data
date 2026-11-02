@@ -52,3 +52,40 @@ EV-WT02C40C: it has no on-board debugger. Connect an nRF5340 DK's
 ```bash
 west flash -d $APP/build_wt02c40c
 ```
+
+### Flash the prebuilt EV-WT02C40C firmware (no build needed)
+
+`firmware/ev_wt02c40c/` holds ready-to-flash images built from this source
+with the default settings (170 W base, buttons step 10 W):
+
+- `net_core_ipc_radio.hex`: Bluetooth controller for the network core
+- `app.hex`: the power meter app for the application core
+
+Install [nrfutil](https://www.nordicsemi.com/Products/Development-tools/nRF-Util)
+and its device command (`nrfutil install device`). Wire up the nRF5340 DK as
+above, then from this folder:
+
+```bash
+nrfutil device program --firmware firmware/ev_wt02c40c/net_core_ipc_radio.hex \
+  --core Network --options chip_erase_mode=ERASE_RANGES_TOUCHED_BY_FIRMWARE
+nrfutil device program --firmware firmware/ev_wt02c40c/app.hex \
+  --core Application --options chip_erase_mode=ERASE_RANGES_TOUCHED_BY_FIRMWARE
+nrfutil device reset
+```
+
+Flash the network core first. If more than one board is plugged in, add
+`--serial-number <DK serial>` to each command (`nrfutil device list` shows it).
+
+After a source change, rebuild and copy the new images over these files:
+
+```bash
+cp build_wt02c40c/nrf52_power_meter/zephyr/zephyr.hex firmware/ev_wt02c40c/app.hex
+cp build_wt02c40c/ipc_radio/zephyr/zephyr.hex firmware/ev_wt02c40c/net_core_ipc_radio.hex
+```
+
+## Buttons (EV-WT02C40C)
+
+Button 1 raises the base power by `CONFIG_APP_BUTTON_STEP_WATTS` (default
+10 W) and button 2 lowers it, within `CONFIG_APP_MIN_WATTS` and
+`CONFIG_APP_MAX_WATTS`. Each press logs the new value on the USB console.
+ERG targets from Zwift still take priority. The value resets on reboot.
