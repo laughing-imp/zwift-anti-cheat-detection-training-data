@@ -6,9 +6,8 @@ app on another machine can pair it as a "Power Source" and "Cadence" sensor.
 It sends a steady power value (default 110 W) with small random jitter, plus
 crank revolution data so the receiving app can work out cadence.
 
-The device name defaults to "claudecode" (close to the "claude code" label
-make_variant_fit.py uses), so rides recorded from it are easy to tell apart in
-training data. Keep names to 10 characters or less: BLE advertisements are
+The device name defaults to "Garmin", the same name make_variant_fit.py
+writes into FIT files and the nRF firmware advertises. Keep names to 10 characters or less: BLE advertisements are
 small, and a longer name may be cut off.
 
 Needs the `bless` package (pip install bless). On first run macOS will ask to
@@ -16,7 +15,7 @@ let your terminal use Bluetooth; allow it.
 
 Usage:
   python3 fake_power_meter.py [--watts 110] [--jitter 3] [--cadence 85]
-      [--name claudecode] [--hz 1]
+      [--name Garmin] [--hz 1]
 """
 import argparse
 import asyncio
@@ -112,7 +111,7 @@ def main():
     p.add_argument("--watts", type=int, default=110, help="target power (W)")
     p.add_argument("--jitter", type=int, default=3, help="random +/- watts per sample")
     p.add_argument("--cadence", type=float, default=85, help="cadence (rpm), 0 to disable")
-    p.add_argument("--name", default="claudecode",
+    p.add_argument("--name", default="Garmin",
                    help="advertised device name (10 characters max)")
     p.add_argument("--hz", type=float, default=1, help="updates per second")
     args = p.parse_args()

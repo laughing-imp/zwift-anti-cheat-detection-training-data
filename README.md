@@ -20,13 +20,13 @@ See the docstring at the top of the script for full details.
 Makes this Mac advertise as a Bluetooth power meter (standard Cycling Power
 Service), so Zwift on another machine can pair it as a Power Source and
 Cadence sensor. Sends a steady wattage with small jitter, plus crank data for
-cadence. The device is named "claudecode" by default (names are limited to 10
-characters), close to the "claude code" label `make_variant_fit.py` uses.
+cadence. The device is named "Garmin" by default (names are limited to 10
+characters), the same name `make_variant_fit.py` writes into FIT files.
 
 ```
 pip install bless
 python3 fake_power_meter.py [--watts 110] [--jitter 3] [--cadence 85]
-    [--name claudecode] [--hz 1]
+    [--name Garmin] [--hz 1]
 ```
 
 ## nrf52_power_meter/
