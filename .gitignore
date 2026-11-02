@@ -8,3 +8,6 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# Firmware build output
+nrf52_power_meter/build*/

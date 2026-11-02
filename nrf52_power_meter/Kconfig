@@ -1,0 +1,64 @@
+menu "Power meter simulator"
+
+config APP_WATTS
+	int "Base power on flat road (W)"
+	default 180
+
+config APP_BUTTON_STEP_WATTS
+	int "Base power change per button press (W)"
+	default 10
+	help
+	  Button 1 raises the base power, button 2 lowers it, within
+	  APP_MIN_WATTS and APP_MAX_WATTS. Boards without buttons ignore this.
+
+config APP_MIN_WATTS
+	int "Lowest power (W)"
+	default 100
+
+config APP_MAX_WATTS
+	int "Highest power (W)"
+	default 350
+
+config APP_RIDER_KG
+	int "Rider weight (kg)"
+	default 69
+
+config APP_UPHILL_CENTI_WKG
+	int "Extra power on climbs (0.01 W/kg)"
+	default 30
+	help
+	  30 = +0.2 W/kg, which is +14 W at 69 kg.
+
+config APP_DOWNHILL_CENTI_WKG
+	int "Less power on descents (0.01 W/kg)"
+	default 20
+	help
+	  20 = -0.2 W/kg, which is -14 W at 69 kg.
+
+config APP_FULL_GRADE_CENTI_PCT
+	int "Grade (0.01 %) at which the full climb/descent change applies"
+	default 200
+	help
+	  Below this grade the change is scaled down, so small rollers only
+	  nudge power. 200 = 2 %.
+
+config APP_RAMP_PCT
+	int "Share of the gap to the target power closed each update (%)"
+	default 25
+	range 1 100
+
+config APP_JITTER_WATTS
+	int "Random +/- watts per sample"
+	default 3
+
+config APP_CADENCE_RPM
+	int "Cadence on flat road (rpm), 0 to disable crank data"
+	default 85
+
+config APP_UPDATE_MS
+	int "Measurement interval (ms)"
+	default 1000
+
+endmenu
+
+source "Kconfig.zephyr"
