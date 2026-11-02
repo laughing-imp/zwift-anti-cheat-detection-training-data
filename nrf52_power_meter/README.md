@@ -2,9 +2,9 @@
 
 Zephyr / nRF Connect SDK app that turns an nRF52 dev board into a BLE power
 meter. It advertises the standard Cycling Power Service (0x1818) as
-"claudecode", so Zwift can pair it as a Power Source and Cadence sensor. It
+"Garmin", so Zwift can pair it as a Power Source and Cadence sensor. It
 sends 110 W (+/-3) and 85 rpm crank data once a second. The Device Information
-Service reports manufacturer "claude code", model "nrf52 power sim".
+Service reports manufacturer "Garmin", model "nrf52 power sim".
 
 LED0 blinks while advertising and stays on while connected. Logs go to the
 board's USB serial port (115200).
