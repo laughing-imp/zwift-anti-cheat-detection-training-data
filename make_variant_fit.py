@@ -14,7 +14,7 @@ Changes made:
     to or from zero is a 100% change.
   * heart rate: unchanged
   * speed: removed (record speed/enhanced_speed, lap/session avg/max speed)
-  * product name in file_id and device_info set to "claude code", and
+  * product name in file_id and device_info set to "Garmin", and
     manufacturer set to 52 ("seiko_epson"; FIT has no Anthropic ID)
   * lap/session avg/max power and cadence recomputed from the new samples
 
@@ -34,7 +34,7 @@ POWER_TOL = 0.04     # default, override with --power-tol
 CADENCE_TOL = 0.05   # default, override with --cadence-tol
 OFFSET_SHARE = 0.6   # share of the margin used by the whole-ride offset
 ZERO_SHIFT = 2       # max samples each zero-run edge moves; 0 disables
-DEVICE_NAME = b"claude code"
+DEVICE_NAME = b"Garmin"
 
 # Global message numbers
 FILE_ID, DEVICE_INFO, RECORD, LAP, SESSION = 0, 23, 20, 19, 18
